@@ -9,26 +9,26 @@ builder.Services.AddControllers();
 
 // Настройка аутентификации JWT
 var configuration = builder.Configuration; // Получаем доступ к конфигурации
-builder.Services.AddAuthentication(cfg =>
+builder.Services.AddAuthentication(cfg => 
 {
-    cfg.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    cfg.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    cfg.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    cfg.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 
+    cfg.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
+    cfg.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; 
 })
-.AddJwtBearer(x =>
+.AddJwtBearer(x => 
 {
-    x.RequireHttpsMetadata = false;
-    x.SaveToken = false;
-    x.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(configuration["ApplicationSettings:JWT_Secret"])
-        ),
-        ValidateIssuer = false,
-        ValidateAudience = false,
-        ClockSkew = TimeSpan.Zero
-    };
+    x.RequireHttpsMetadata = false; 
+    x.SaveToken = false; 
+    x.TokenValidationParameters = new TokenValidationParameters 
+    { 
+        ValidateIssuerSigningKey = true, 
+        IssuerSigningKey = new SymmetricSecurityKey( 
+            Encoding.UTF8.GetBytes(configuration["ApplicationSettings:JWT_Secret"]) 
+        ), 
+        ValidateIssuer = false, 
+        ValidateAudience = false, 
+        ClockSkew = TimeSpan.Zero 
+    }; 
 });
 
 // Настройка Swagger
